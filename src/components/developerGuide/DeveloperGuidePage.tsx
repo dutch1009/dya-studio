@@ -9,7 +9,7 @@ import {
   IconPhoto,
 } from "@tabler/icons-react";
 import type { MouseEvent, ReactNode } from "react";
-import { useLanguage } from "../../hooks/useLanguage";\nimport { navigateToPath } from "../../hooks/useUrlTab";
+import { useLanguage } from "../../hooks/useLanguage";\nimport { navigateToPath, navigateToRouteAnchor } from "../../hooks/useUrlTab";
 import { ThemeSelect } from "../ThemeSelect";
 import type {
   DeveloperGuideLink,
@@ -380,6 +380,11 @@ export function DeveloperGuidePage({
   const handleGuideNavigation = (event: MouseEvent<HTMLElement>) => {
     const link = (event.target as Element | null)?.closest("a[href]");
     const href = link?.getAttribute("href");
+    if (href?.startsWith("#")) {
+      event.preventDefault();
+      navigateToRouteAnchor(href.slice(1));
+      return;
+    }
     if (!href?.startsWith("/developer-guide")) return;
 
     event.preventDefault();
