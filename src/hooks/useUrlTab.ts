@@ -26,21 +26,33 @@ export function getCurrentRouteAnchor(): string {
   return separator < 0 ? "" : routeHash.slice(separator + 1);
 }
 
-function routeUrl(path: string): string {
-  if (isFileRoute()) {
-    return `${window.location.pathname}${window.location.search}#${path}`;
-  }
-  return path;
-}
-
 export function navigateToPath(path: string): void {
-  window.history.pushState(null, "", routeUrl(path));
+  if (isFileRoute()) {
+    // Fragment navigation is supported by file:// and does not reload the app.
+    window.location.hash = path;
+    return;
+  }
+  window.history.pushState(null, "", path);
   window.dispatchEvent(new PopStateEvent("popstate"));
 }
 
 export function replacePath(path: string): void {
-  window.history.replaceState(null, "", routeUrl(path));
+  if (isFileRoute()) {
+    // Replace only the fragment so Electron stays on the loaded index.html.
+    window.location.replace(`#${path}`);
+    return;
+  }
+  window.history.replaceState(null, "", path);
   window.dispatchEvent(new PopStateEvent("popstate"));
+}
+
+export function navigateToRouteAnchor(anchor: string): void {
+  if (isFileRoute()) {
+    window.location.hash = `${getCurrentPathname()}#${anchor}`;
+    document.getElementById(anchor)?.scrollIntoView({ block: "start" });
+    return;
+  }
+  window.location.hash = anchor;
 }
 
 function subscribeToNavigation(onChange: () => void) {
