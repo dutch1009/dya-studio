@@ -1,7 +1,8 @@
 import { useEffect } from "react";
 import { IconArrowLeft, IconSparkles, IconTag } from "@tabler/icons-react";
 import DyaLogo from "../assets/dya.svg?react";
-import { useLanguage } from "../hooks/useLanguage";\nimport { getCurrentRouteAnchor } from "../hooks/useUrlTab";
+import { useLanguage } from "../hooks/useLanguage";
+import { getCurrentRouteAnchor } from "../hooks/useUrlTab";
 import { LanguageToggle } from "../components/LanguageToggle";
 import {
   CHANGE_CATEGORIES,
