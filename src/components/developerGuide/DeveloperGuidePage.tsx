@@ -9,7 +9,7 @@ import {
   IconPhoto,
 } from "@tabler/icons-react";
 import type { MouseEvent, ReactNode } from "react";
-import { useLanguage } from "../../hooks/useLanguage";
+import { useLanguage } from "../../hooks/useLanguage";\nimport { navigateToPath } from "../../hooks/useUrlTab";
 import { ThemeSelect } from "../ThemeSelect";
 import type {
   DeveloperGuideLink,
@@ -385,8 +385,7 @@ export function DeveloperGuidePage({
     event.preventDefault();
     link?.closest("details")?.removeAttribute("open");
     window.scrollTo(0, 0);
-    window.history.pushState({}, "", href);
-    window.dispatchEvent(new PopStateEvent("popstate"));
+    navigateToPath(href);
   };
 
   return (
