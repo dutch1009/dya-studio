@@ -34,7 +34,7 @@ import { AbyssCallbackPage } from "./pages/AbyssCallbackPage";
 import { OAUTH_CALLBACK_PATH } from "./lib/abyss/abyssOAuth";
 import { useLanguage } from "./hooks/useLanguage";
 import { usePageMetadata } from "./hooks/usePageMetadata";
-import { useUrlTab, usePathname, pathnameFromTabId } from "./hooks/useUrlTab";
+import {\n  useUrlTab,\n  usePathname,\n  pathnameFromTabId,\n  navigateToPath,\n  replacePath as replaceRoutePath,\n} from "./hooks/useUrlTab";
 import { useDevtool } from "./hooks/useDevtool";
 import { DevtoolWindow } from "./components/DevtoolWindow";
 import { trackPageView } from "./lib/analytics";
@@ -152,17 +152,12 @@ function AppContent() {
   // stays reachable from the splash screen and via GitHub Release deep links.
   const pathname = usePathname();
   const navigatePath = useCallback((path: string) => {
-    if (window.location.pathname !== path) {
-      window.history.pushState(null, "", path);
-    }
-    // Notify both this route state and useUrlTab's own popstate listener.
-    window.dispatchEvent(new PopStateEvent("popstate"));
+    navigateToPath(path);
   }, []);
   // Same as navigatePath but without a history entry, so Back never returns to
   // a URL carrying a spent OAuth authorization code.
   const replacePath = useCallback((path: string) => {
-    window.history.replaceState(null, "", path);
-    window.dispatchEvent(new PopStateEvent("popstate"));
+    replaceRoutePath(path);
   }, []);
   const onReleaseNotes = pathname === RELEASE_NOTES_PATH;
   const onOauthCallback = pathname === OAUTH_CALLBACK_PATH;
@@ -183,12 +178,7 @@ function AppContent() {
     // rewriting it to "/" would discard the ?code=&state= query string before
     // AbyssCallbackPage ever gets to read it.
     if (urlTab !== activeTab && window.location.pathname !== "/") {
-      window.history.replaceState(
-        null,
-        "",
-        urlTab === "macro-combo" ? "/keymap" : "/",
-      );
-      window.dispatchEvent(new PopStateEvent("popstate"));
+      replaceRoutePath(urlTab === "macro-combo" ? "/keymap" : "/");
     }
   }, [
     pathname,
