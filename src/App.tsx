@@ -34,7 +34,13 @@ import { AbyssCallbackPage } from "./pages/AbyssCallbackPage";
 import { OAUTH_CALLBACK_PATH } from "./lib/abyss/abyssOAuth";
 import { useLanguage } from "./hooks/useLanguage";
 import { usePageMetadata } from "./hooks/usePageMetadata";
-import {\n  useUrlTab,\n  usePathname,\n  pathnameFromTabId,\n  navigateToPath,\n  replacePath as replaceRoutePath,\n} from "./hooks/useUrlTab";
+import {
+  useUrlTab,
+  usePathname,
+  pathnameFromTabId,
+  navigateToPath,
+  replacePath as replaceRoutePath,
+} from "./hooks/useUrlTab";
 import { useDevtool } from "./hooks/useDevtool";
 import { DevtoolWindow } from "./components/DevtoolWindow";
 import { trackPageView } from "./lib/analytics";
