@@ -69,7 +69,7 @@ export function usePathname(): string {
 }
 
 export function tabIdFromPathname(pathname: string): string {
-  const segment = pathname.replace(/^\\/+/, "").split("/")[0];
+  const segment = pathname.replace(/^\/+/, "").split("/")[0];
   return segment === "import-export" ? "keymap" : segment || "home";
 }
 
