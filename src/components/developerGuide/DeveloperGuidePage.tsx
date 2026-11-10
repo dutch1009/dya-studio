@@ -9,7 +9,8 @@ import {
   IconPhoto,
 } from "@tabler/icons-react";
 import type { MouseEvent, ReactNode } from "react";
-import { useLanguage } from "../../hooks/useLanguage";\nimport { navigateToPath, navigateToRouteAnchor } from "../../hooks/useUrlTab";
+import { useLanguage } from "../../hooks/useLanguage";
+import { navigateToPath, navigateToRouteAnchor } from "../../hooks/useUrlTab";
 import { ThemeSelect } from "../ThemeSelect";
 import type {
   DeveloperGuideLink,
