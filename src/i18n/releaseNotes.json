@@ -4,6 +4,15 @@
       "version": "upcoming",
       "date": null,
       "changes": {
+        "major": [],
+        "minor": [],
+        "patch": []
+      }
+    },
+    {
+      "version": "2026.11.10.0",
+      "date": "2026-11-10",
+      "changes": {
         "major": [
           {
             "en": "Configure runtime combos directly on the keymap with visual previews and floating binding editors.",
