@@ -379,7 +379,7 @@ export function MacroComboPage() {
     try {
       // Flush any queued debounced edits so they are part of this persist.
       if (!(await macroEditor.flushPendingWrites())) return;
-      await comboEditor.flushPendingWrites();
+      if (!(await comboEditor.flushPendingWrites())) return;
       if (macroAvailable) {
         if (!(await runtimeMacro.saveMacros())) return;
         macroEditor.clearGlobalModified();
